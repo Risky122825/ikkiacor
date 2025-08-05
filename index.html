@@ -1,91 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <base target="_top">
-  <?!= include("Style"); ?>
-</head>
-<body>
-  <h2>Form Data Pengguna</h2>
+  <head>
+    <base target="_top">
+    <?!= include("Style"); ?>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Data Tamu</h1>
+      <button onclick="getData()">Tampilkan Data</button>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Level</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-  <div class="form-group">
-    <input type="text" id="id" placeholder="ID">
-    <input type="text" id="nama" placeholder="NAMA">
-    <input type="text" id="username" placeholder="USERNAME">
-    <input type="text" id="level" placeholder="LEVEL">
+    <script>
+      const url = 'https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec?read=true';
 
-    <button onclick="createData()">Tambah (Create)</button>
-    <button onclick="updateData()">Ubah (Update)</button>
-    <button onclick="deleteData()">Hapus (Delete)</button>
-    <button onclick="getData()">Tampilkan Semua (Read)</button>
-  </div>
-
-  <pre id="output"></pre>
-
-  <script>
-    const url = 'https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec';
-
-    function getFieldValues() {
-      return {
-        ID: document.getElementById('id').value,
-        NAMA: document.getElementById('nama').value,
-        USERNAME: document.getElementById('username').value,
-        LEVEL: document.getElementById('level').value
-      };
-    }
-
-    function createData() {
-      fetch(url + '?action=create', {
-        method: 'POST',
-        body: JSON.stringify(getFieldValues())
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('output').textContent = data;
-        getData();
-      });
-    }
-
-    function updateData() {
-      fetch(url + '?action=update', {
-        method: 'POST',
-        body: JSON.stringify(getFieldValues())
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('output').textContent = data;
-        getData();
-      });
-    }
-
-    function deleteData() {
-      const idOnly = { ID: document.getElementById('id').value };
-      fetch(url + '?action=delete', {
-        method: 'POST',
-        body: JSON.stringify(idOnly)
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('output').textContent = data;
-        getData();
-      });
-    }
-
-    function getData() {
-      fetch(url + '?read=true')
-        .then(res => res.json())
-        .then(data => {
-          let text = 'Data:\n\n';
-          data.forEach(row => {
-            text += `ID: ${row.ID}, NAMA: ${row.NAMA}, USERNAME: ${row.USERNAME}, LEVEL: ${row.LEVEL}\n`;
+      function getData() {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${item.ID}</td>
+                <td>${item.NAMA}</td>
+                <td>${item.USERNAME ?? '-'}</td>
+                <td>${item.LEVEL ?? '-'}</td>
+              `;
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error('Gagal mengambil data:', error);
+            alert('Gagal mengambil data. Cek console untuk detail.');
           });
-          document.getElementById('output').textContent = text;
-        })
-        .catch(err => {
-          document.getElementById('output').textContent = "Gagal mengambil data: " + err;
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", getData);
-  </script>
-</body>
+      }
+    </script>
+  </body>
 </html>
