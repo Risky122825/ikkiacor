@@ -1,178 +1,237 @@
-/* Reset dasar */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Latar belakang dengan animasi bubble */
+/* Body */
 body {
-  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #dbeafe, #fef3c7);
+  color: #333;
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+  padding: 40px 20px;
 }
 
-body::before {
-  content: '';
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(173, 216, 230, 0.3) 20%, transparent 70%);
-  animation: moveBackground 20s linear infinite;
-  z-index: 0;
-  top: -50%;
-  left: -50%;
-}
-
-@keyframes moveBackground {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(50px, 50px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* Kontainer */
+/* Container utama */
 .container {
   max-width: 900px;
-  margin: 60px auto;
-  background-color: #ffffffdd;
-  padding: 30px 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* Judul */
 h1, h2 {
   text-align: center;
-  margin-bottom: 25px;
-  color: #333;
+  margin-bottom: 20px;
+  color: #1e3a8a;
 }
 
 /* Form */
-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #444;
+form {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-form input {
-  width: 100%;
+label {
+  font-weight: bold;
+  color: #1f2937;
+}
+
+input {
   padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  transition: border-color 0.3s;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline-color: #60a5fa;
 }
 
-form input:focus {
-  border-color: #6a8eff;
-  outline: none;
-}
-
-/* Tombol Kirim */
-form button {
-  margin-top: 20px;
-  background-color: #6a8eff;
-  color: white;
-  padding: 10px 20px;
+/* Tombol kirim */
+button[type="submit"] {
+  padding: 12px;
+  background: #3b82f6;
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-form button:hover {
-  background-color: #4f6de0;
-}
-
-/* Status */
-#status {
-  margin-top: 15px;
-  text-align: center;
   font-weight: bold;
-  color: green;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Status info */
+#status {
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+  color: #10b981;
 }
 
 /* Tabel */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
-  overflow-x: auto;
+  margin-top: 20px;
 }
 
 th, td {
-  padding: 12px 15px;
+  padding: 12px;
   border: 1px solid #ccc;
   text-align: center;
 }
 
 thead {
-  background-color: #6a8eff;
-  color: white;
+  background-color: #93c5fd;
+  color: #1e3a8a;
+}
+
+tbody tr {
+  animation: bounceIn 0.5s ease;
+  background-color: #f9fafb;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f2f6ff;
+  background-color: #f3f4f6;
 }
 
 /* Tombol Aksi */
-.action-buttons {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-
-.action-buttons button {
+.action-btn {
   padding: 6px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
-  color: white;
-  transition: transform 0.2s;
-}
-
-.action-buttons button:hover {
-  transform: scale(1.1);
+  margin: 0 3px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .edit-btn {
-  background-color: #2ecc71;
+  background-color: #22c55e;
+}
+
+.edit-btn:hover {
+  background-color: #16a34a;
 }
 
 .delete-btn {
-  background-color: #e74c3c;
+  background-color: #ef4444;
 }
 
-.accept-btn {
-  background-color: #f1c40f;
-  color: #222;
+.delete-btn:hover {
+  background-color: #dc2626;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .container {
-    padding: 20px;
+/* Animasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  form input,
-  form button {
-    font-size: 14px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  table {
-    font-size: 14px;
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button:hover,
+.action-btn:hover {
+  transform: scale(1.05);
+}
+/* Bubble Background Animation */
+.bubbles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: rise 20s infinite ease-in;
+}
+
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+  animation-duration: 22s;
+}
+
+.bubble:nth-child(2) {
+  width: 20px;
+  height: 20px;
+  left: 25%;
+  animation-duration: 17s;
+}
+
+.bubble:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  left: 40%;
+  animation-duration: 25s;
+}
+
+.bubble:nth-child(4) {
+  width: 30px;
+  height: 30px;
+  left: 55%;
+  animation-duration: 19s;
+}
+
+.bubble:nth-child(5) {
+  width: 50px;
+  height: 50px;
+  left: 70%;
+  animation-duration: 21s;
+}
+
+.bubble:nth-child(6) {
+  width: 25px;
+  height: 25px;
+  left: 85%;
+  animation-duration: 18s;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-1200px) scale(1.5);
+    opacity: 0;
   }
 }
