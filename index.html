@@ -1,51 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-    <?!= include("Style"); ?>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Data Tamu</h1>
-      <button onclick="getData()">Tampilkan Data</button>
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>Username</th>
-            <th>Level</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buku Tamu Digital</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Buku Tamu Digital</h1>
+    <form id="guestForm">
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" required />
 
-    <script>
-      const url = 'https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec?read=true';
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required />
 
-      function getData() {
-        fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            const tableBody = document.querySelector('#dataTable tbody');
-            tableBody.innerHTML = '';
-            data.forEach(item => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                <td>${item.ID}</td>
-                <td>${item.NAMA}</td>
-                <td>${item.USERNAME ?? '-'}</td>
-                <td>${item.LEVEL ?? '-'}</td>
-              `;
-              tableBody.appendChild(row);
-            });
-          })
-          .catch(error => {
-            console.error('Gagal mengambil data:', error);
-            alert('Gagal mengambil data. Cek console untuk detail.');
-          });
-      }
-    </script>
-  </body>
+      <label for="instansi">Instansi:</label>
+      <input type="text" id="instansi" name="instansi" required />
+
+      <label for="keperluan">Keperluan:</label>
+      <input type="text" id="keperluan" name="keperluan" required />
+
+      <label for="waktu">Waktu:</label>
+      <input type="datetime-local" id="waktu" name="waktu" required />
+
+      <button type="submit">Kirim</button>
+    </form>
+    <p id="status"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
