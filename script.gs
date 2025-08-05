@@ -1,95 +1,47 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyyk_B8a7hrDdYM8SOo4J0-OrMFH4dvG8p_RNDhF_n46FRoqW8UiJUmg_aLPkLZA3TO8A/exec';
-const form = document.getElementById('guestForm');
-const status = document.getElementById('status');
-const tableBody = document.querySelector('#guestTable tbody');
+// Data yang sudah kamu berikan
+const data = [
+  { ID: "klp3001", NAMA: "RISKY ADITYA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:15" },
+  { ID: "klp3002", NAMA: "ARIF RAFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:30" },
+  { ID: "klp3003", NAMA: "A.DHAFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:45" },
+  { ID: "klp3004", NAMA: "MUH RIFAL", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-06 8:00" },
+  { ID: "klp3005", NAMA: "MIFTAHULKHAIRAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-07 7:45" },
+  { ID: "klp3006", NAMA: "KARINA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-08 7:45" },
+  { ID: "klp3007", NAMA: "M.NABIL PUTRA HADI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-09 7:45" },
+  { ID: "klp3008", NAMA: "A. MUH AL AMIN", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-10 7:45" },
+  { ID: "klp3009", NAMA: "MUH YUSUF", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-11 7:45" },
+  { ID: "klp3010", NAMA: "AKRAM ZULQAIDAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-12 7:45" },
+  { ID: "klp3011", NAMA: "MUH APRIANSYAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-13 7:45" },
+  { ID: "klp3012", NAMA: "MUH RESKI ANDIKA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-14 7:45" },
+  { ID: "klp3013", NAMA: "ARINDA SOFIANITA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-15 7:45" },
+  { ID: "klp3014", NAMA: "AFRAH ALIFA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-16 7:45" },
+  { ID: "klp3015", NAMA: "NOVITA SARI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-17 7:45" },
+  { ID: "klp3016", NAMA: "RAHMANIAR", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-18 7:45" },
+  { ID: "klp3017", NAMA: "NINDI NUR SEISA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-19 7:45" },
+  { ID: "klp3018", NAMA: "CHELSI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-20 7:45" },
+  { ID: "klp3019", NAMA: "NADIA MEISYA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-21 7:45" },
+  { ID: "klp3020", NAMA: "MARIO SUTAN SYAHREZA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-22 7:45" },
+  { ID: "klp3021", NAMA: "ARDAL", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-23 7:45" },
+  { ID: "klp3022", NAMA: "FAQIH FARDHAN ALQIFARI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-24 7:45" },
+  { ID: "klp3023", NAMA: "ALFENDY PRATAMA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-25 7:45" },
+  { ID: "klp3024", NAMA: "MUH AL IKHSAN", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-26 7:45" },
+  { ID: "klp3025", NAMA: "ANDIKA SAPUTRA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-27 7:45" },
+  { ID: "klp3026", NAMA: "MUH AKRAM", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-28 7:45" },
+  { ID: "klp3027", NAMA: "FANY AMELINDA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-29 7:45" },
+  { ID: "klp3028", NAMA: "A. AHMAD ROFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-30 7:45" }
+];
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = new FormData(form);
+// Ambil tbody
+const tbody = document.querySelector("#dataTable tbody");
 
-  fetch(scriptURL, { method: 'POST', body: data })
-    .then(response => {
-      status.innerText = 'Data berhasil dikirim!';
-      form.reset();
-      fetchData();
-    })
-    .catch(error => {
-      status.innerText = 'Gagal mengirim data.';
-      console.error('Error!', error.message);
-    });
+// Tambahkan baris
+data.forEach(item => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${item.ID}</td>
+    <td>${item.NAMA}</td>
+    <td>${item.INSTANSI}</td>
+    <td>${item.KEPERLUAN}</td>
+    <td>${item.WAKTU}</td>
+  `;
+  tbody.appendChild(tr);
 });
-
-function fetchData() {
-  fetch(scriptURL)
-    .then(response => response.json())
-    .then(data => {
-      tableBody.innerHTML = '';
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${row.ID}</td>
-          <td>${row.NAMA}</td>
-          <td>${row.INSTANSI}</td>
-          <td>${row.KEPERLUAN}</td>
-          <td>${row.WAKTU}</td>
-          <td class="action-buttons">
-            <button class="edit">Edit</button>
-            <button class="delete">Hapus</button>
-          </td>
-        `;
-        tr.querySelector('.edit').addEventListener('click', () => editRow(row));
-        tr.querySelector('.delete').addEventListener('click', () => deleteRow(row));
-        tableBody.appendChild(tr);
-      });
-    })
-    .catch(error => {
-      console.error('Gagal mengambil data:', error);
-    });
-}
-
-function editRow(row) {
-  const newName = prompt('Edit Nama:', row.NAMA);
-  const newInstansi = prompt('Edit Instansi:', row.INSTANSI);
-  const newKeperluan = prompt('Edit Keperluan:', row.KEPERLUAN);
-  const newWaktu = prompt('Edit Waktu:', row.WAKTU);
-
-  const formData = new FormData();
-  formData.append('action', 'update');
-  formData.append('id', row.ID);
-  formData.append('nama', newName);
-  formData.append('instansi', newInstansi);
-  formData.append('keperluan', newKeperluan);
-  formData.append('waktu', newWaktu);
-
-  fetch(scriptURL, { method: 'POST', body: formData })
-    .then(response => response.text())
-    .then(msg => {
-      alert(msg);
-      fetchData();
-    })
-    .catch(error => {
-      alert('Gagal update data');
-      console.error('Error!', error.message);
-    });
-}
-
-function deleteRow(row) {
-  if (confirm(`Yakin ingin menghapus data ID: ${row.ID}?`)) {
-    const formData = new FormData();
-    formData.append('action', 'delete');
-    formData.append('id', row.ID);
-
-    fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => response.text())
-      .then(msg => {
-        alert(msg);
-        fetchData();
-      })
-      .catch(error => {
-        alert('Gagal hapus data');
-        console.error('Error!', error.message);
-      });
-  }
-}
-
-fetchData();
