@@ -1,78 +1,163 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
+/* Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
+/* Body */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #dbeafe, #fef3c7);
   color: #333;
+  min-height: 100vh;
+  padding: 40px 20px;
 }
 
+/* Container utama */
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Judul */
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e3a8a;
+}
+
+/* Form */
 form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 label {
-  margin-top: 10px;
   font-weight: bold;
+  color: #1f2937;
 }
 
 input {
-  padding: 8px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  margin-top: 20px;
   padding: 10px;
-  background-color: #0066cc;
-  color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline-color: #60a5fa;
+}
+
+/* Tombol kirim */
+button[type="submit"] {
+  padding: 12px;
+  background: #3b82f6;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #005bb5;
+button[type="submit"]:hover {
+  background: #2563eb;
+  transform: scale(1.05);
 }
 
+/* Status info */
 #status {
+  text-align: center;
   margin-top: 10px;
   font-style: italic;
-  color: green;
+  color: #10b981;
 }
 
+/* Tabel */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 th, td {
+  padding: 12px;
   border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
-th {
-  background-color: #0066cc;
-  color: white;
+thead {
+  background-color: #93c5fd;
+  color: #1e3a8a;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+tbody tr {
+  animation: bounceIn 0.5s ease;
+  background-color: #f9fafb;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+/* Tombol Aksi */
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #22c55e;
+}
+
+.edit-btn:hover {
+  background-color: #16a34a;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button:hover,
+.action-btn:hover {
+  transform: scale(1.05);
 }
