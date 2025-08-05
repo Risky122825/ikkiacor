@@ -1,58 +1,53 @@
 <style>
   body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f4f8;
-    padding: 30px;
-    color: #333;
+    font-family: Arial, sans-serif;
+    background-color: #f4f8ff;
+    padding: 20px;
   }
 
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #007acc;
-  }
-
-  .form-group {
-    max-width: 500px;
-    margin: 0 auto;
-    background: #ffffff;
+  .container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   }
 
-  input {
-    padding: 10px;
-    margin: 8px 0;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  h1 {
+    text-align: center;
+    color: #3366cc;
   }
 
   button {
-    padding: 10px;
-    margin: 8px 0;
-    width: 100%;
-    background: #007acc;
+    display: block;
+    margin: 10px auto 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3366cc;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
   }
 
-  button:hover {
-    background: #005f99;
+  table {
+    width: 100%;
+    border-collapse: collapse;
   }
 
-  pre {
-    background: #f7f9fb;
-    padding: 15px;
-    border: 1px dashed #ccc;
-    white-space: pre-wrap;
-    word-break: break-word;
-    margin-top: 20px;
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  th {
+    background-color: #3366cc;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
   }
 </style>
-
