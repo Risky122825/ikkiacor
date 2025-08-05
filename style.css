@@ -1,163 +1,178 @@
-/* Reset */
+/* Reset dasar */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* Body */
-body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #dbeafe, #fef3c7);
-  color: #333;
-  min-height: 100vh;
-  padding: 40px 20px;
 }
 
-/* Container utama */
+/* Latar belakang dengan animasi bubble */
+body {
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(173, 216, 230, 0.3) 20%, transparent 70%);
+  animation: moveBackground 20s linear infinite;
+  z-index: 0;
+  top: -50%;
+  left: -50%;
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(50px, 50px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Kontainer */
 .container {
   max-width: 900px;
-  margin: auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  animation: fadeIn 1s ease-in-out;
+  margin: 60px auto;
+  background-color: #ffffffdd;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 /* Judul */
 h1, h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #1e3a8a;
+  margin-bottom: 25px;
+  color: #333;
 }
 
 /* Form */
-form {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-label {
+form label {
+  display: block;
+  margin-top: 15px;
   font-weight: bold;
-  color: #1f2937;
+  color: #444;
 }
 
-input {
+form input {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  outline-color: #60a5fa;
+  margin-top: 5px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  transition: border-color 0.3s;
 }
 
-/* Tombol kirim */
-button[type="submit"] {
-  padding: 12px;
-  background: #3b82f6;
-  color: #fff;
+form input:focus {
+  border-color: #6a8eff;
+  outline: none;
+}
+
+/* Tombol Kirim */
+form button {
+  margin-top: 20px;
+  background-color: #6a8eff;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 12px;
-  cursor: pointer;
+  border-radius: 8px;
   font-weight: bold;
-  transition: background 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
-  background: #2563eb;
-  transform: scale(1.05);
+form button:hover {
+  background-color: #4f6de0;
 }
 
-/* Status info */
+/* Status */
 #status {
+  margin-top: 15px;
   text-align: center;
-  margin-top: 10px;
-  font-style: italic;
-  color: #10b981;
+  font-weight: bold;
+  color: green;
 }
 
 /* Tabel */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 30px;
+  overflow-x: auto;
 }
 
 th, td {
-  padding: 12px;
+  padding: 12px 15px;
   border: 1px solid #ccc;
   text-align: center;
 }
 
 thead {
-  background-color: #93c5fd;
-  color: #1e3a8a;
-}
-
-tbody tr {
-  animation: bounceIn 0.5s ease;
-  background-color: #f9fafb;
+  background-color: #6a8eff;
+  color: white;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f3f4f6;
+  background-color: #f2f6ff;
 }
 
 /* Tombol Aksi */
-.action-btn {
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.action-buttons button {
   padding: 6px 12px;
   border: none;
-  border-radius: 8px;
-  color: #fff;
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  margin: 0 3px;
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.action-buttons button:hover {
+  transform: scale(1.1);
 }
 
 .edit-btn {
-  background-color: #22c55e;
-}
-
-.edit-btn:hover {
-  background-color: #16a34a;
+  background-color: #2ecc71;
 }
 
 .delete-btn {
-  background-color: #ef4444;
+  background-color: #e74c3c;
 }
 
-.delete-btn:hover {
-  background-color: #dc2626;
+.accept-btn {
+  background-color: #f1c40f;
+  color: #222;
 }
 
-/* Animasi */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-@keyframes bounceIn {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
+  form input,
+  form button {
+    font-size: 14px;
   }
-  60% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
-button:hover,
-.action-btn:hover {
-  transform: scale(1.05);
+  table {
+    font-size: 14px;
+  }
 }
