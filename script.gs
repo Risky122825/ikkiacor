@@ -1,4 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyyk_B8a7hrDdYM8SOo4J0-OrMFH4dvG8p_RNDhF_n46FRoqW8UiJUmg_aLPkLZA3TO8A/exec';
 const form = document.getElementById('guestForm');
 const status = document.getElementById('status');
 const tableBody = document.querySelector('#guestTable tbody');
