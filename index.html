@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile("Style").getContent(); ?>
+  </head>
+  <body>
+    <h2>Form Data Pengguna</h2>
+
+    <div class="form-group">
+      <input type="text" id="id" placeholder="ID">
+      <input type="text" id="nama" placeholder="NAMA">
+      <input type="text" id="username" placeholder="USERNAME">
+      <input type="text" id="level" placeholder="LEVEL">
+
+      <button onclick="createData()">Tambah (Create)</button>
+      <button onclick="updateData()">Ubah (Update)</button>
+      <button onclick="deleteData()">Hapus (Delete)</button>
+      <button onclick="getData()">Tampilkan Semua (Read)</button>
+    </div>
+
+    <pre id="output"></pre>
+
+    <script>
+      const url = 'https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec';
+
+      function getFieldValues() {
+        return {
+          ID: document.getElementById('id').value,
+          NAMA: document.getElementById('nama').value,
+          USERNAME: document.getElementById('username').value,
+          LEVEL: document.getElementById('level').value
+        };
+      }
+
+      function createData() {
+        fetch(url + '?action=create', {
+          method: 'POST',
+          body: JSON.stringify(getFieldValues())
+        })
+        .then(res => res.text())
+        .then(data => document.getElementById('output').textContent = data);
+      }
+
+      function updateData() {
+        fetch(url + '?action=update', {
+          method: 'POST',
+          body: JSON.stringify(getFieldValues())
+        })
+        .then(res => res.text())
+        .then(data => document.getElementById('output').textContent = data);
+      }
+
+      function deleteData() {
+        const idOnly = { ID: document.getElementById('id').value };
+        fetch(url + '?action=delete', {
+          method: 'POST',
+          body: JSON.stringify(idOnly)
+        })
+        .then(res => res.text())
+        .then(data => document.getElementById('output').textContent = data);
+      }
+
+      function getData() {
+        fetch(url + '?read=true')
+        .then(res => res.json())
+        .then(data => {
+          let text = 'Data:\n\n';
+          data.forEach(row => {
+            text += `ID: ${row.ID}, NAMA: ${row.NAMA}, USERNAME: ${row.USERNAME}, LEVEL: ${row.LEVEL}\n`;
+          });
+          document.getElementById('output').textContent = text;
+        });
+      }
+    </script>
+  </body>
+</html>
 
