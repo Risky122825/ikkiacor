@@ -2,7 +2,6 @@ function doGet(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
 
   if (e.parameter.read === "true") {
-    // READ JSON
     const data = sheet.getDataRange().getValues();
     const headers = data[0];
     const result = [];
@@ -15,7 +14,8 @@ function doGet(e) {
       result.push(row);
     }
 
-    return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
   } else {
     return HtmlService.createHtmlOutputFromFile("Index");
   }
@@ -28,11 +28,13 @@ function doPost(e) {
 
   if (action === "create") {
     if (!data.ID || !data.NAMA || !data.USERNAME || !data.LEVEL) {
-      return ContentService.createTextOutput("Semua field wajib diisi.").setMimeType(ContentService.MimeType.TEXT);
+      return ContentService.createTextOutput("Semua field wajib diisi.");
     }
     sheet.appendRow([data.ID, data.NAMA, data.USERNAME, data.LEVEL]);
-    return ContentService.createTextOutput("Data berhasil ditambahkan.").setMimeType(ContentService.MimeType.TEXT);
-  } else if (action === "update") {
+    return ContentService.createTextOutput("Data berhasil ditambahkan.");
+  }
+
+  if (action === "update") {
     const values = sheet.getDataRange().getValues();
     let updated = false;
 
@@ -48,8 +50,10 @@ function doPost(e) {
 
     return ContentService.createTextOutput(
       updated ? "Data berhasil diperbarui." : "Data tidak ditemukan."
-    ).setMimeType(ContentService.MimeType.TEXT);
-  } else if (action === "delete") {
+    );
+  }
+
+  if (action === "delete") {
     const values = sheet.getDataRange().getValues();
     let deleted = false;
 
@@ -63,9 +67,8 @@ function doPost(e) {
 
     return ContentService.createTextOutput(
       deleted ? "Data berhasil dihapus." : "Data tidak ditemukan."
-    ).setMimeType(ContentService.MimeType.TEXT);
-  } else {
-    return ContentService.createTextOutput("Aksi tidak dikenali.").setMimeType(ContentService.MimeType.TEXT);
+    );
   }
-}
 
+  return ContentService.createTextOutput("Aksi tidak dikenali.");
+}
