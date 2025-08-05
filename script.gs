@@ -1,47 +1,55 @@
-// Data yang sudah kamu berikan
-const data = [
-  { ID: "klp3001", NAMA: "RISKY ADITYA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:15" },
-  { ID: "klp3002", NAMA: "ARIF RAFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:30" },
-  { ID: "klp3003", NAMA: "A.DHAFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-05 7:45" },
-  { ID: "klp3004", NAMA: "MUH RIFAL", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-06 8:00" },
-  { ID: "klp3005", NAMA: "MIFTAHULKHAIRAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-07 7:45" },
-  { ID: "klp3006", NAMA: "KARINA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-08 7:45" },
-  { ID: "klp3007", NAMA: "M.NABIL PUTRA HADI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-09 7:45" },
-  { ID: "klp3008", NAMA: "A. MUH AL AMIN", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-10 7:45" },
-  { ID: "klp3009", NAMA: "MUH YUSUF", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-11 7:45" },
-  { ID: "klp3010", NAMA: "AKRAM ZULQAIDAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-12 7:45" },
-  { ID: "klp3011", NAMA: "MUH APRIANSYAH", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-13 7:45" },
-  { ID: "klp3012", NAMA: "MUH RESKI ANDIKA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-14 7:45" },
-  { ID: "klp3013", NAMA: "ARINDA SOFIANITA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-15 7:45" },
-  { ID: "klp3014", NAMA: "AFRAH ALIFA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-16 7:45" },
-  { ID: "klp3015", NAMA: "NOVITA SARI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-17 7:45" },
-  { ID: "klp3016", NAMA: "RAHMANIAR", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-18 7:45" },
-  { ID: "klp3017", NAMA: "NINDI NUR SEISA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-19 7:45" },
-  { ID: "klp3018", NAMA: "CHELSI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-20 7:45" },
-  { ID: "klp3019", NAMA: "NADIA MEISYA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-21 7:45" },
-  { ID: "klp3020", NAMA: "MARIO SUTAN SYAHREZA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-22 7:45" },
-  { ID: "klp3021", NAMA: "ARDAL", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-23 7:45" },
-  { ID: "klp3022", NAMA: "FAQIH FARDHAN ALQIFARI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-24 7:45" },
-  { ID: "klp3023", NAMA: "ALFENDY PRATAMA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-25 7:45" },
-  { ID: "klp3024", NAMA: "MUH AL IKHSAN", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-26 7:45" },
-  { ID: "klp3025", NAMA: "ANDIKA SAPUTRA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-27 7:45" },
-  { ID: "klp3026", NAMA: "MUH AKRAM", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-28 7:45" },
-  { ID: "klp3027", NAMA: "FANY AMELINDA", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-29 7:45" },
-  { ID: "klp3028", NAMA: "A. AHMAD ROFI", INSTANSI: "PESERTA DIDIK", KEPERLUAN: "PELAJAR", WAKTU: "2025-08-30 7:45" }
-];
+// Ganti dengan URL API kamu
+const apiUrl = "https://script.google.com/macros/s/AKfycbxqu2DMLwKCMUEVuX15Wo0C0SPGohsLRLbYP4SPKuJ5Zwjed4-RkdbZx0MRE1V1XtxKOQ/exec";
 
-// Ambil tbody
-const tbody = document.querySelector("#dataTable tbody");
+// Tangani pengiriman form
+document.getElementById("guestForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-// Tambahkan baris
-data.forEach(item => {
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${item.ID}</td>
-    <td>${item.NAMA}</td>
-    <td>${item.INSTANSI}</td>
-    <td>${item.KEPERLUAN}</td>
-    <td>${item.WAKTU}</td>
-  `;
-  tbody.appendChild(tr);
+  const formData = new FormData(this);
+  const data = new URLSearchParams(formData);
+
+  fetch(apiUrl, {
+    method: "POST",
+    body: data
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      document.getElementById("status").textContent = "Data berhasil dikirim!";
+      this.reset();
+      loadTable(); // Muat ulang data tabel
+    })
+    .catch((error) => {
+      document.getElementById("status").textContent = "Gagal mengirim data!";
+      console.error(error);
+    });
 });
+
+// Fungsi untuk memuat data dari API dan menampilkannya di tabel
+function loadTable() {
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const tbody = document.querySelector("#dataTable tbody");
+      tbody.innerHTML = "";
+
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${item.ID}</td>
+          <td>${item.NAMA}</td>
+          <td>${item.INSTANSI}</td>
+          <td>${item.KEPERLUAN}</td>
+          <td>${item.WAKTU}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    })
+    .catch((error) => {
+      console.error("Gagal mengambil data:", error);
+    });
+}
+
+// Panggil loadTable saat halaman dibuka
+window.onload = loadTable;
